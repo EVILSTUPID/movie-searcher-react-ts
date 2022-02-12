@@ -1,73 +1,60 @@
-import {call, put, fork, takeEvery} from 'redux-saga/effects';
-import {
-  setForecasts, setWeather, setForecastsDays,
-  fetchError, fetchLoaded, setCityData,
-} from '../reducers';
-import {
-  FORECAST, LOAD_CITY, LOAD_MAIN_WEATHER,
-  LOAD_WEATHER, WEATHER,
-} from '../../actions/actions';
+import {call, fork, put, takeEvery} from 'redux-saga/effects';
+import {LOAD_MOVIE, LOAD_PAGE} from "../../actions/actions";
+import {setMovieData} from "../reducers";
+import {API_CALL, API_KEY} from "../../tools/api";
+import axios from "axios";
 
-
-async function fetchWeather(type, payload) {
+async function fetchMovie(payload) {
   const request = await fetch(
-      `https://api.openweathermap.org/data/2.5/${type}?q=${payload}&appid=${process.env.REACT_APP_MY_APP_KEY}&units=metric&lang=ru`,
+      `${API_CALL}movie/popular?api_key=${API_KEY}&language=ru&page=${payload}&adult=false`,
+  );
+
+  return request.json();
+}
+async function fetchLanguages() {
+  const request = await fetch(
+      `${API_CALL}configuration/languages?api_key=${API_KEY}`,
   );
 
   return request.json();
 }
 
-async function fetchCity(payload) {
+async function fetchVideo({movie_id}) {
   const request = await fetch(
-      `https://autocomplete.travelpayouts.com/places2?term=${payload}&locale=ru&types[]=city`,
-  );
-
-  return request.json();
-}
-async function fetchForecastDays(lat, lon) {
-  const request = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${process.env.REACT_APP_MY_APP_KEY}&units=metric&lang=ru`,
+      `${API_CALL}movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`,
   );
 
   return request.json();
 }
 
-export function* workerSaga({payload}) {
-  try {
-    const dataForecast = yield call(fetchWeather, FORECAST, payload);
-    yield put(setForecasts(dataForecast));
-    const dataWeather = yield call(fetchWeather, WEATHER, payload);
-    yield put(setWeather(dataWeather));
-    const {lat, lon} = dataWeather.coord;
-    const dataForecastDays = yield call(fetchForecastDays, lat, lon);
-    yield put(setForecastsDays(dataForecastDays));
-    yield put(fetchLoaded());
-  } catch (e) {
-    yield put(fetchError());
-  }
+async function fetchSearchMovie() {
+  const request = await fetch(
+      `${API_CALL}search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`,
+  );
+
+  return request.json();
 }
 
-export function* workerSagaCity({payload}) {
-  const dataCity = yield call(fetchCity, payload);
-  yield put(setCityData(dataCity));
-  console.log(dataCity);
-}
 
-export function* workerSagaMainWeather({payload}) {
-  try {
-    const dataForecastDays = yield call(fetchForecastDays, payload.lat, payload.lon);
-    yield put(setForecastsDays(dataForecastDays));
-    yield put(fetchLoaded());
-  } catch (e) {
-    yield put(fetchError());
-  }
+
+const axiosSuccess = axios.create({
+  baseURL: `${API_CALL}movie/popular?api_key=${API_KEY}&language=ru&adult=false`
+})
+
+export function* workerMovie({payload}) {
+  const movieData = yield call(() => axiosSuccess.get(`&page=${payload}`))
+  console.log(movieData)
+  yield put(setMovieData(movieData));
+
+  const lan = yield call(fetchLanguages)
+  console.log()
+
 }
 
 
 export function* watchLoadWeather() {
-  yield takeEvery<any>(LOAD_WEATHER, workerSaga);
-  yield takeEvery<any>(LOAD_CITY, workerSagaCity);
-  yield takeEvery<any>(LOAD_MAIN_WEATHER, workerSagaMainWeather);
+  yield takeEvery<any>(LOAD_MOVIE, workerMovie);
+  yield takeEvery<any>(LOAD_PAGE, workerMovie);
 }
 export function* rootSaga() {
   yield fork(watchLoadWeather);

@@ -6,12 +6,14 @@
   box-sizing: border-box;
 }
 body {
-  background-color: white;
-  text-transform: capitalize;
   font-size: 13px;
+  margin: auto;
+  background-color: #100d1e;
+  font-family: system-ui;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
