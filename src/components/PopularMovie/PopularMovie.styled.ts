@@ -19,6 +19,7 @@ export const PosterList = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 20px;
+  
 `;
 export const PosterName = styled.div`
   display: flex;
@@ -38,11 +39,15 @@ export const Page = styled.div`
   justify-content: center;
   font-size: 30px;
   color: #c9c9c9;
+  padding-bottom: 20px;
 `;
 
 export const StyledLink = styled(Link)`
-    text-decoration: none;
+  text-decoration: none;
 `;
+
+
+
 
 
 

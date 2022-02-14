@@ -1,19 +1,18 @@
-import {useDispatch, useSelector} from "react-redux";
-import {setMovie} from "./redux/reducers";
+import {useDispatch} from "react-redux";
+import {setPage} from "./redux/reducers";
 import {useEffect} from "react";
-import {PopularMovieMain} from "./components/PopularMovie/PopularMovieMain";
-
+import {MovieMain} from "./components/MainMovie/MainMovie";
 
 
 export const App = (): JSX.Element => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(setMovie(1));
+        dispatch(setPage(1));
     }, [])
 
   return (
     <div  className="app_main">
-        <PopularMovieMain/>
+        <MovieMain/>
     </div>
   );
 }

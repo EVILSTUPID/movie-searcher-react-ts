@@ -1,4 +1,4 @@
-export const LOAD_MOVIE: string = 'LOAD_MOVIE';
-export const LOAD_PAGE: string = 'LOAD_PAGE';
-
+export const LOAD_PAGE = 'LOAD_PAGE';
+export const LOAD_SELECTED_MOVIE = 'LOAD_SELECTED_MOVIE';
+export const LOAD_SEARCHED_MOVIE = 'LOAD_SEARCHED_MOVIE';
 

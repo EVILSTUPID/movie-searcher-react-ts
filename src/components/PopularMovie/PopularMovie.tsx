@@ -1,8 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
 import {movieDataSelect} from "../../redux/selectors";
-import {setPage} from "../../redux/reducers";
+import {setPage, setSelectedMovieId} from "../../redux/reducers";
 import {Page, Poster, PosterImage, PosterList, PosterName, StyledLink} from "./PopularMovie.styled";
 import {nanoid} from "@reduxjs/toolkit";
+import {API_IMAGE_URL, API_KEY} from "../../tools/api";
 
 
 export const PopularMovie = () => {
@@ -51,9 +52,9 @@ export const PopularMovie = () => {
                     movie.results.slice(0, 18).map((moviePost) => {
                         return (
                             <Poster key={nanoid()}>
-                                <StyledLink to='/info'>
+                                <StyledLink onClick={() => dispatch(setSelectedMovieId(moviePost.id))}  to='/info'>
                                 <PosterImage
-                                    src={`https://image.tmdb.org/t/p/original${moviePost.poster_path}?api_key=${process.env.REACT_APP_MY_APP_KEY}`}
+                                    src={`${API_IMAGE_URL}${moviePost.poster_path}?api_key=${API_KEY}`}
                                     alt=''/>
                                 <PosterName>
                                     {moviePost.title}

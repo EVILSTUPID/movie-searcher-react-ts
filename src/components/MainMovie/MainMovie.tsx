@@ -1,12 +1,18 @@
-import {MainMovieInfo} from "./MainMovie.styled";
-import {PopularMovie} from "../PopularMovie/PopularMovie";
+import {Route, Routes} from "react-router-dom";
 import {HeaderMenu} from "../HeaderMenu/HeaderMenu";
+import {PopularMovie} from "../PopularMovie/PopularMovie";
+import {SelectedMovieInfo} from "../SelectedMovieInfo/SelectedMovieInfo";
 
-export const MainMovie = (): JSX.Element => {
+export const MovieMain = (): JSX.Element => {
+
     return (
-        <MainMovieInfo>
-            <HeaderMenu/>
-            <PopularMovie/>
-        </MainMovieInfo>
-    )
+        <div>
+            <Routes>
+                <Route path='/' element={<HeaderMenu/>}>
+                    <Route path='/movie-searcher-react-ts' element={<PopularMovie/>} />
+                    <Route path='/info' element={<SelectedMovieInfo/>}/>
+                </Route>
+            </Routes>
+        </div>
+    );
 }

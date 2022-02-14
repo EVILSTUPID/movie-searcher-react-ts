@@ -1,10 +1,12 @@
 import {createAction, createSlice} from '@reduxjs/toolkit';
-import {movieStatus} from '../../types/types';
-import {LOAD_MOVIE, LOAD_PAGE} from "../../actions/actions";
+import {ImovieStatus} from '../../types/types';
+import {LOAD_PAGE, LOAD_SEARCHED_MOVIE, LOAD_SELECTED_MOVIE} from "../../actions/actions";
 
 
-const initialState: movieStatus = {
-  movieList: null,
+const initialState: ImovieStatus = {
+  moviePopularList: null,
+  selectedMovieDetails: null,
+  movieSearchData: null
 };
 
 const weatherSlice = createSlice({
@@ -12,21 +14,31 @@ const weatherSlice = createSlice({
   initialState,
   reducers: {
     setMovieData (state, action) {
-      state.movieList = action.payload
+      state.moviePopularList = action.payload
     },
-    setMovieDataIn (state) {
-      const incrData = 1
-      state.movieList.page = state.movieList?.page + incrData
+    setSelectedMovieDetailsData (state, action) {
+      state.selectedMovieDetails = action.payload
+    },
+    setMovieSearchData (state, action) {
+      state.movieSearchData = action.payload
+      console.log(action.payload)
+    },
+    clearMovieSearchData (state) {
+      state.movieSearchData = null
     }
   },
 });
 
-export const setMovie = createAction(LOAD_MOVIE, (page) => ({
-  payload: page,
-}));
 export const setPage = createAction(LOAD_PAGE, (page) => ({
   payload: page,
 }));
+export const setSelectedMovieId = createAction(LOAD_SELECTED_MOVIE, (id) => ({
+  payload: id,
+}));
 
-export const { setMovieData, setMovieDataIn } = weatherSlice.actions;
+export const setSearchedMovie = createAction(LOAD_SEARCHED_MOVIE, (query) => ({
+  payload: query,
+}));
+
+export const { setMovieData, setSelectedMovieDetailsData, setMovieSearchData, clearMovieSearchData } = weatherSlice.actions;
 export const weatherReducer = weatherSlice.reducer;
