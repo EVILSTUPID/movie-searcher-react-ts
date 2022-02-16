@@ -10,14 +10,15 @@ import {
 import { API_KEY, axiosPopular } from '../tools/api'
 
 export function * workerMovieLoad ({ payload }) {
+  const nowPlayingMovie = yield call(() => axiosPopular.get(
+    `movie/upcoming?api_key=${API_KEY}&page=${payload}&language=ru`
+))
+  yield put(setMovieNowPlaying(nowPlayingMovie.data))
   const popularMovieArr = yield call(() => axiosPopular.get(
       `movie/popular?api_key=${API_KEY}&page=${payload}&language=ru`
   ))
   yield put(setMovieData(popularMovieArr.data))
-  const nowPlayingMovie = yield call(() => axiosPopular.get(
-      `movie/upcoming?api_key=${API_KEY}&page=${payload}&language=ru`
-  ))
-  yield put(setMovieNowPlaying(nowPlayingMovie.data))
+
 }
 export function * workerMovieSelect ({ payload }) {
   const selectedMovieInfo = yield call(() => axiosPopular.get(`movie/${payload}?api_key=${API_KEY}&language=ru`))
