@@ -1,7 +1,11 @@
 export interface ImovieStatus {
   moviePopularList: ImovieData | undefined | null
-  selectedMovieDetails: IselectedMovieData | undefined | null
+  selectedMovieDetails: {
+    selectedMovieData: IselectedMovieData | undefined | null
+    selectedMovieSimilar: ImovieData | undefined | null
+  }
   movieSearchData: ImovieData | undefined | null
+  movieNowPLaying: ImovieData | undefined | null
 }
 
 export interface ImovieData {

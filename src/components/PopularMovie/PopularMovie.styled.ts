@@ -33,11 +33,12 @@ export const PosterName = styled.div`
   text-decoration: none;
 `;
 
-export const Page = styled.div`
+export const Pages = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  font-size: 30px;
+  align-items: center;
+  font-size: 25px;
   color: #c9c9c9;
   padding-bottom: 20px;
 `;

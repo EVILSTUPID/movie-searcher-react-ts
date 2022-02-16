@@ -1,20 +1,22 @@
-import {useSelector} from "react-redux";
-import {selectedMovieSelect} from "../../redux/selectors";
-import {API_IMAGE_URL, API_KEY} from "../../tools/api";
+import { useSelector } from 'react-redux'
+import { selectedMovieSelect } from '../../redux/selectors'
+import { API_IMAGE_URL, API_KEY } from '../../tools/api'
 import {
-    MovieCompanyBlock,
-    MovieInfoName, MovieMiniInfoBlocks,
-    PosterImage,
-    StyledMovieInfo,
-    StyledMovieInfoBlock,
-    StyledMovieInfoOverwied,
-    StyledMovieSelectedGenres
-} from "./SelectedMovieInfo.styled";
-import {nanoid} from "@reduxjs/toolkit";
+  MovieCompanyBlock,
+  MovieInfoName,
+  MovieMiniInfoBlocks,
+  PosterImage,
+  StyledMovieInfo,
+  StyledMovieInfoBlock,
+  StyledMovieInfoOverwied,
+  StyledMovieSelectedGenres
+} from './SelectedMovieInfo.styled'
+import { nanoid } from '@reduxjs/toolkit'
+import { SelectedMovieSimilar } from './SelectedMovieSimilar'
 
 export const SelectedMovieInfo = (): JSX.Element => {
-    const selectedMovie = useSelector(selectedMovieSelect)
-    return (
+  const selectedMovie = useSelector(selectedMovieSelect)
+  return (
 
 <div>{selectedMovie && (
     <div>
@@ -29,9 +31,9 @@ export const SelectedMovieInfo = (): JSX.Element => {
                 <StyledMovieSelectedGenres>
                     <div>Жанры:</div>
                     {selectedMovie.genres.map((genres) => {
-                        return (
+                      return (
                             <div key={nanoid()}>&nbsp;{genres.name},</div>
-                        )
+                      )
                     })}
                 </StyledMovieSelectedGenres>
             <StyledMovieInfoOverwied>
@@ -40,19 +42,18 @@ export const SelectedMovieInfo = (): JSX.Element => {
                 <MovieMiniInfoBlocks>Средняя оценка: {selectedMovie.vote_average}</MovieMiniInfoBlocks>
                 <MovieMiniInfoBlocks>
                 <MovieCompanyBlock>Компании: {selectedMovie.production_companies.map((companies) => {
-                    return (
+                  return (
                         <div key={nanoid()}>
                             <div>&nbsp;{companies.name},</div>
                         </div>
-                    )
+                  )
                 })}</MovieCompanyBlock></MovieMiniInfoBlocks>
 
             </StyledMovieInfoOverwied>
             </StyledMovieInfoBlock>
-
+            <SelectedMovieSimilar/>
         </StyledMovieInfo>
-
     </div>)}
 </div>
-    )
+  )
 }

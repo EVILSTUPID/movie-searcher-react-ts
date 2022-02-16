@@ -1,42 +1,40 @@
-import {useDispatch, useSelector} from "react-redux";
-import {useState} from "react";
-import {clearMovieSearchData, setSearchedMovie, setSelectedMovieId} from "../../redux/reducers";
-import {searchedMovieSelect} from "../../redux/selectors";
-import {nanoid} from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { clearMovieSearchData, setSearchedMovie, setSelectedMovieId } from '../../redux/reducers'
+import { searchedMovieSelect } from '../../redux/selectors'
+import { nanoid } from '@reduxjs/toolkit'
 import {
-    AutoComplete,
-    InputStyled,
-    MovieSearchList,
-    MovieSearchName,
-    MovieSearchPoster,
-    SearchStyled,
-    StyledLink
-} from "./Search.styled";
-import {Link} from "react-router-dom";
-import {API_IMAGE_URL, API_KEY} from "../../tools/api";
-
+  AutoComplete,
+  InputStyled,
+  MovieSearchList,
+  MovieSearchName,
+  MovieSearchPoster,
+  SearchStyled,
+  StyledLink
+} from './Search.styled'
+import { API_IMAGE_URL, API_KEY } from '../../tools/api'
 
 export const Search = () => {
-    const [value, setValue] = useState<string>('');
-    const movieSearched = useSelector(searchedMovieSelect)?.results
-    const dispatch = useDispatch();
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
-        if (e.target.value.trim().length > 1) {
-            dispatch(setSearchedMovie(e.target.value))
-        }
-        if (e.target.value.trim().length === 0) {
-            dispatch(clearMovieSearchData())
-        }
-    };
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (value.trim()) {
+  const [value, setValue] = useState<string>('')
+  const movieSearched = useSelector(searchedMovieSelect)?.results
+  const dispatch = useDispatch()
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value)
+    if (e.target.value.trim().length > 1) {
+      dispatch(setSearchedMovie(e.target.value))
+    }
+    if (e.target.value.trim().length === 0) {
+      dispatch(clearMovieSearchData())
+    }
+  }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (value.trim()) {
+      setValue('')
+    }
+  }
+  return (
 
-            setValue('');
-        }
-    };
-    return (
         <SearchStyled>
             <form onSubmit={handleSubmit}>
                 <InputStyled
@@ -49,13 +47,13 @@ export const Search = () => {
             <AutoComplete>
                 {movieSearched &&
                     movieSearched.slice(0, 4).map((movie) => {
-                        return (
+                      return (
 
                             <MovieSearchList key={nanoid()}>
                                 <StyledLink onClick={() => {
-                                    dispatch(setSelectedMovieId(movie.id))
-                                    dispatch(clearMovieSearchData())
-                                    setValue('')
+                                  dispatch(setSelectedMovieId(movie.id))
+                                  dispatch(clearMovieSearchData())
+                                  setValue('')
                                 }} to='/info'>
                                     <div>
                                     <MovieSearchPoster
@@ -66,11 +64,11 @@ export const Search = () => {
                                     </MovieSearchName>
                                 </StyledLink>
                             </MovieSearchList>
-                        );
+                      )
                     })
 
                 }
             </AutoComplete>
         </SearchStyled>
-    );
-};
+  )
+}

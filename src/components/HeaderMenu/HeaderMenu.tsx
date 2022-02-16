@@ -1,10 +1,11 @@
-import {HeaderMenuStyled, HeaderPage, SearchPage} from "./HeaderMenu.styled";
-import {Outlet} from "react-router-dom";
-import {Search} from "../Search/Search";
+import { HeaderMenuStyled, HeaderPage, SearchPage } from './HeaderMenu.styled'
+import { Outlet } from 'react-router-dom'
+import { Search } from '../Search/Search'
 
 export const HeaderMenu = () => {
-    return (
+  return (
         <div>
+
         <HeaderMenuStyled>
             <HeaderPage to='/movie-searcher-react-ts'>
                 Главная
@@ -17,5 +18,5 @@ export const HeaderMenu = () => {
 
             <Outlet/>
     </div>
-    );
-};
+  )
+}
