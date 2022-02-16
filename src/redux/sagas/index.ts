@@ -1,5 +1,5 @@
 import { call, fork, put, takeEvery } from 'redux-saga/effects'
-import { LOAD_PAGE, LOAD_SEARCHED_MOVIE, LOAD_SELECTED_MOVIE } from '../../actions/actions'
+import { LOAD_PAGE, LOAD_SEARCHED_MOVIE, LOAD_SELECTED_MOVIE } from '../actions/actions'
 import {
   setMovieData,
   setMovieNowPlaying,
@@ -7,7 +7,7 @@ import {
   setMovieSimilar,
   setSelectedMovieDetailsData
 } from '../reducers'
-import { API_KEY, axiosPopular } from '../../tools/api'
+import { API_KEY, axiosPopular } from '../tools/api'
 
 export function * workerMovieLoad ({ payload }) {
   const popularMovieArr = yield call(() => axiosPopular.get(

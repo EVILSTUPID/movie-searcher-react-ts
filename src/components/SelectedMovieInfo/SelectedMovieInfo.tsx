@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { selectedMovieSelect } from '../../redux/selectors'
-import { API_IMAGE_URL, API_KEY } from '../../tools/api'
+import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
 import {
   MovieCompanyBlock,
   MovieInfoName,

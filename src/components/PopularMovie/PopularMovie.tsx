@@ -3,7 +3,7 @@ import { movieDataSelect } from '../../redux/selectors'
 import { setPage, setSelectedMovieId } from '../../redux/reducers'
 import { Pages, Poster, PosterImage, PosterList, PosterName, StyledLink } from './PopularMovie.styled'
 import { nanoid } from '@reduxjs/toolkit'
-import { API_IMAGE_URL, API_KEY } from '../../tools/api'
+import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material'
 import * as React from 'react'
 

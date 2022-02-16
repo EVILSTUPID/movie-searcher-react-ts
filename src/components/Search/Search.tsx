@@ -12,7 +12,7 @@ import {
   SearchStyled,
   StyledLink
 } from './Search.styled'
-import { API_IMAGE_URL, API_KEY } from '../../tools/api'
+import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
 
 export const Search = () => {
   const [value, setValue] = useState<string>('')

@@ -1,10 +1,10 @@
 import { PopularMovie } from '../PopularMovie/PopularMovie'
-import { NowPlayingMovies } from '../NowPlayingMovies/NowPlayingMovies'
+import { UpComingMovies } from '../UpComingMovies/UpComingMovies'
 
 export const MainMovie = (): JSX.Element => {
   return (
         <div>
-            <NowPlayingMovies/>
+            <UpComingMovies/>
             <PopularMovie/>
         </div>
   )

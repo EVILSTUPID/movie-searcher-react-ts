@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import {Swiper} from "swiper/react";
 
-export const NowPlayingCarousel = styled(Swiper)`
+export const UpComingMoviesCarousel = styled(Swiper)`
   width: 100%;
   height: auto;
 `;
-export const NowPlayingSlider = styled.div`
+export const UpComingMoviesSlider = styled.div`
   text-align: center;
   width: 100%;
 `;
-export const NowPlayingOverview = styled.div`
+export const UpComingMoviesOverview = styled.div`
   position: absolute;
   bottom: 0 ;
   padding: 10px;

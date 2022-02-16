@@ -1,6 +1,6 @@
 import { createAction, createSlice } from '@reduxjs/toolkit'
 import { ImovieStatus } from '../../types/types'
-import { LOAD_PAGE, LOAD_SEARCHED_MOVIE, LOAD_SELECTED_MOVIE } from '../../actions/actions'
+import { LOAD_PAGE, LOAD_SEARCHED_MOVIE, LOAD_SELECTED_MOVIE } from '../actions/actions'
 
 const initialState: ImovieStatus = {
   moviePopularList: null,
