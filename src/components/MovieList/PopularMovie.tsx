@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import {movieDataSelect, selectedFavouritesMovie} from '../../redux/selectors'
-import {setPage, setSelectedMovieId, setFavouritesMovie, delFavouritesMovie} from '../../redux/reducers'
+import {setPage, setSelectedMovieId, addFavouritesMovie, delFavouritesMovie} from '../../redux/reducers'
 import {Favourites, Pages, Poster, PosterImage, PosterList, PosterName, FavouritesInImage, StyledLink} from './PopularMovie.styled'
 import { nanoid } from '@reduxjs/toolkit'
 import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
@@ -9,6 +9,7 @@ import * as React from 'react'
 import {useState} from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {scrollUp} from "../../redux/tools/scrollUp";
+import {saveToLocalStorage} from "../../redux/tools/localStorage";
 
 export const PopularMovie = () => {
   const dispatch = useDispatch()
@@ -61,7 +62,8 @@ export const PopularMovie = () => {
                                     if (isFavourite) {
                                       dispatch(delFavouritesMovie(moviePost))
                                     } else {
-                                    dispatch(setFavouritesMovie(moviePost))
+                                    dispatch(addFavouritesMovie(moviePost))
+
                                     }
                                   }}
                               />

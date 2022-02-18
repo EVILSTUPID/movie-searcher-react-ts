@@ -15,7 +15,8 @@ import {
 } from './SelectedMovieInfo.styled'
 import { nanoid } from '@reduxjs/toolkit'
 import { SelectedMovieSimilar } from './SelectedMovieSimilar'
-import {delFavouritesMovie, setFavouritesMovie} from "../../redux/reducers";
+import {delFavouritesMovie, addFavouritesMovie} from "../../redux/reducers";
+import {saveToLocalStorage} from "../../redux/tools/localStorage";
 
 export const SelectedMovieInfo = (): JSX.Element => {
   const selectedMovie = useSelector(selectedMovieSelect)
@@ -34,7 +35,8 @@ export const SelectedMovieInfo = (): JSX.Element => {
                   if (isFavourite) {
                     dispatch(delFavouritesMovie(selectedMovie))
                   } else {
-                    dispatch(setFavouritesMovie(selectedMovie))
+                    dispatch(addFavouritesMovie(selectedMovie))
+
                   }
                 }}
             />

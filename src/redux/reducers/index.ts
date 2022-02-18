@@ -34,14 +34,17 @@ const weatherSlice = createSlice({
     setMovieNowPlaying (state, action) {
       state.movieNowPLaying = action.payload
     },
-    setFavouritesMovie (state, action) {
+    addFavouritesMovie (state, action) {
       if (state.favouritesMovie.findIndex((movie) => movie.id === action.payload.id) == -1){
         state.favouritesMovie.push(action.payload)
       }
     },
     delFavouritesMovie (state, action) {
       state.favouritesMovie = state.favouritesMovie.filter((movie) => movie.id !== action.payload.id)
-      },
+    },
+    setFavouritesMovie (state, action) {
+      state.favouritesMovie = action.payload
+    },
     clearMovieSearchData (state) {
       state.movieSearchData = null
     }
@@ -63,7 +66,9 @@ export const {
   setMovieData, setMovieNowPlaying,
   setSelectedMovieDetailsData, setMovieSearchData,
   clearMovieSearchData, setMovieSimilar,
-  setFavouritesMovie, delFavouritesMovie
+  addFavouritesMovie, delFavouritesMovie,
+  setFavouritesMovie
+
 } = weatherSlice.actions
 
 export const weatherReducer = weatherSlice.reducer

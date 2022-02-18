@@ -2,8 +2,19 @@ import {Favourites, HeaderMenuStyled, HeaderPage, Home, SearchPage} from './Head
 import { Outlet } from 'react-router-dom'
 import { Search } from '../Search/Search'
 import {scrollUp} from "../../redux/tools/scrollUp";
+import {useEffect} from "react";
+import {setPage} from "../../redux/reducers";
+import {useSelector} from "react-redux";
+import {selectedFavouritesMovie} from "../../redux/selectors";
+import {saveToLocalStorage} from "../../redux/tools/localStorage";
 
 export const HeaderMenu = () => {
+    const favourite = useSelector(selectedFavouritesMovie)
+
+    useEffect(() => {
+        saveToLocalStorage(favourite)
+    },)
+
   return (
         <div>
 
