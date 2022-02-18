@@ -1,4 +1,4 @@
-import { ImovieData, ImovieStatus, IselectedMovieData } from '../types/types'
+import {ImovieData, ImovieDateArray, ImovieStatus, IselectedMovieData} from '../types/types'
 
 export const movieDataSelect = (state: ImovieStatus): ImovieData | null | undefined =>
   state?.moviePopularList
@@ -9,4 +9,6 @@ export const searchedMovieSelect = (state: ImovieStatus): ImovieData | null | un
 export const selectedMovieSimilar = (state: ImovieStatus): ImovieData | null | undefined =>
   state?.selectedMovieDetails.selectedMovieSimilar
 export const selectedMovieNowPlaying = (state: ImovieStatus): ImovieData | null | undefined =>
-  state?.movieNowPLaying
+    state?.movieNowPLaying
+export const selectedFavouritesMovie = (state: ImovieStatus): ImovieDateArray[] | null | undefined =>
+    state?.favouritesMovie

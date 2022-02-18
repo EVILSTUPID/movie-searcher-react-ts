@@ -1,15 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { movieDataSelect } from '../../redux/selectors'
-import { setPage, setSelectedMovieId } from '../../redux/reducers'
-import { Pages, Poster, PosterImage, PosterList, PosterName, StyledLink } from './PopularMovie.styled'
+import {movieDataSelect, selectedFavouritesMovie} from '../../redux/selectors'
+import {setPage, setSelectedMovieId, setFavouritesMovie, delFavouritesMovie} from '../../redux/reducers'
+import {Favourites, Pages, Poster, PosterImage, PosterList, PosterName, FavouritesInImage, StyledLink} from './PopularMovie.styled'
 import { nanoid } from '@reduxjs/toolkit'
 import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material'
 import * as React from 'react'
+import {useState} from "react";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import {scrollUp} from "../../redux/tools/scrollUp";
 
 export const PopularMovie = () => {
   const dispatch = useDispatch()
   const movie = useSelector(movieDataSelect)
+  const favourite = useSelector(selectedFavouritesMovie)
   const movieListPages = [
     {
       pages: movie?.page
@@ -39,29 +43,41 @@ export const PopularMovie = () => {
     }
   }
 
-  const scrollUp = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    })
-  }
+
 
   return (
         <div>
             <PosterList>
                 {movie &&
                     movie.results.slice(0, 18).map((moviePost) => {
+                      const isFavourite = favourite.findIndex((movie) => movie.id === moviePost.id) !== -1
                       return (
                             <Poster key={nanoid()}>
-                                <StyledLink onClick={() => dispatch(setSelectedMovieId(moviePost.id))} to='/info'>
+                              <FavouritesInImage>
+
+                              <Favourites
+                                  style={isFavourite ? { color: 'red' } : {}}
+                                  onClick={() => {
+                                    if (isFavourite) {
+                                      dispatch(delFavouritesMovie(moviePost))
+                                    } else {
+                                    dispatch(setFavouritesMovie(moviePost))
+                                    }
+                                  }}
+                              />
+                                <StyledLink onClick={() => {
+                                  dispatch(setSelectedMovieId(moviePost.id))
+                                  scrollUp()
+                                }} to='/info'>
                                 <PosterImage
                                     src={`${API_IMAGE_URL}${moviePost.poster_path}?api_key=${API_KEY}`}
                                     alt=''/>
-                                <PosterName>
-                                    {moviePost.title}
-                                </PosterName>
-                                </StyledLink>
+
+                                </StyledLink></FavouritesInImage>
+                              <StyledLink onClick={() => dispatch(setSelectedMovieId(moviePost.id))} to='/info'>
+                              <PosterName>
+                              {moviePost.title}
+                            </PosterName></StyledLink>
                             </Poster>
                       )
                     })
@@ -77,11 +93,14 @@ export const PopularMovie = () => {
                       if (isNaN(readyPages.pages)) {
                         readyPages.pages = undefined
                       }
+                      const issddFavourite = readyPages?.pages === movie?.page
                       return (
                             <div onClick={() => {
                               dispatch(setPage(readyPages.pages))
                               scrollUp()
-                            }} key={nanoid()}>
+                            }}
+                                 style={issddFavourite ? {color: 'red'} : {}}
+                                 key={nanoid()}>
                                 {readyPages.pages}
                             </div>
                       )

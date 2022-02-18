@@ -21,7 +21,7 @@ export const SearchStyled = styled.div`
   
 `
 export const AutoComplete = styled.div`
-  max-height: 100px;
+  max-height: 300px;
   overflow-x: hidden;
   overflow-y: auto;
 `

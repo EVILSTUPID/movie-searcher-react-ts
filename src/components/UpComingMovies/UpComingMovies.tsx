@@ -9,7 +9,7 @@ import { selectedMovieNowPlaying } from '../../redux/selectors'
 import { nanoid } from '@reduxjs/toolkit'
 import { Link } from 'react-router-dom'
 import { setSelectedMovieId } from '../../redux/reducers'
-import { PosterImage } from '../PopularMovie/PopularMovie.styled'
+import { PosterImage } from '../MovieList/PopularMovie.styled'
 import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
 import * as React from 'react'
 

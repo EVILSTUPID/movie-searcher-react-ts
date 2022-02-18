@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import HomeIcon from '@mui/icons-material/Home';
 
 export const HeaderMenuStyled = styled.div`
   width: 100%;
@@ -15,6 +17,18 @@ export const HeaderMenuStyled = styled.div`
   top: 0;
   left: 0;
 `;
+export const Favourites = styled(FavoriteIcon)`
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 100%;`
+;
+export const Home = styled(HomeIcon)`
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 100%;`
+;
 export const HeaderPage = styled(Link)`
   border-left: 1px solid #d7d7d7;
   padding: 0 15px 0 15px;

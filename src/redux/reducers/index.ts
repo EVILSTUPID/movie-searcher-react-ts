@@ -8,8 +8,11 @@ const initialState: ImovieStatus = {
     selectedMovieData: null,
     selectedMovieSimilar: null
   },
+  favouritesMovie: [],
   movieSearchData: null,
-  movieNowPLaying: null
+  movieNowPLaying: null,
+  isError: false,
+  isLoad: false,
 }
 
 const weatherSlice = createSlice({
@@ -31,6 +34,14 @@ const weatherSlice = createSlice({
     setMovieNowPlaying (state, action) {
       state.movieNowPLaying = action.payload
     },
+    setFavouritesMovie (state, action) {
+      if (state.favouritesMovie.findIndex((movie) => movie.id === action.payload.id) == -1){
+        state.favouritesMovie.push(action.payload)
+      }
+    },
+    delFavouritesMovie (state, action) {
+      state.favouritesMovie = state.favouritesMovie.filter((movie) => movie.id !== action.payload.id)
+      },
     clearMovieSearchData (state) {
       state.movieSearchData = null
     }
@@ -48,5 +59,11 @@ export const setSearchedMovie = createAction(LOAD_SEARCHED_MOVIE, (query) => ({
   payload: query
 }))
 
-export const { setMovieData, setMovieNowPlaying, setSelectedMovieDetailsData, setMovieSearchData, clearMovieSearchData, setMovieSimilar } = weatherSlice.actions
+export const {
+  setMovieData, setMovieNowPlaying,
+  setSelectedMovieDetailsData, setMovieSearchData,
+  clearMovieSearchData, setMovieSimilar,
+  setFavouritesMovie, delFavouritesMovie
+} = weatherSlice.actions
+
 export const weatherReducer = weatherSlice.reducer

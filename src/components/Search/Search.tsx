@@ -13,6 +13,7 @@ import {
   StyledLink
 } from './Search.styled'
 import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
+import {scrollUp} from "../../redux/tools/scrollUp";
 
 export const Search = () => {
   const [value, setValue] = useState<string>('')
@@ -30,7 +31,7 @@ export const Search = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (value.trim()) {
-      setValue('')
+      setValue('')          
     }
   }
   return (
@@ -53,6 +54,7 @@ export const Search = () => {
                                 <StyledLink onClick={() => {
                                   dispatch(setSelectedMovieId(movie.id))
                                   dispatch(clearMovieSearchData())
+                                    scrollUp()
                                   setValue('')
                                 }} to='/info'>
                                     <div>

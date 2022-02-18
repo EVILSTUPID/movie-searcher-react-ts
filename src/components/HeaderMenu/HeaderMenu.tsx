@@ -1,14 +1,18 @@
-import { HeaderMenuStyled, HeaderPage, SearchPage } from './HeaderMenu.styled'
+import {Favourites, HeaderMenuStyled, HeaderPage, Home, SearchPage} from './HeaderMenu.styled'
 import { Outlet } from 'react-router-dom'
 import { Search } from '../Search/Search'
+import {scrollUp} from "../../redux/tools/scrollUp";
 
 export const HeaderMenu = () => {
   return (
         <div>
 
         <HeaderMenuStyled>
-            <HeaderPage to='/movie-searcher-react-ts'>
-                Главная
+            <HeaderPage onClick={() => scrollUp()} to='/movie-searcher-react-ts'>
+                <Home/>
+            </HeaderPage>
+            <HeaderPage onClick={() => scrollUp()} to='/favourites'>
+                <Favourites/>
             </HeaderPage>
 
             <SearchPage>

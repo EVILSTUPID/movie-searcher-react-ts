@@ -1,7 +1,9 @@
-import { useSelector } from 'react-redux'
-import { selectedMovieSelect } from '../../redux/selectors'
+import {useDispatch, useSelector} from 'react-redux'
+import {selectedFavouritesMovie, selectedMovieSelect} from '../../redux/selectors'
 import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
 import {
+  Favourites,
+  FavouritesInImage,
   MovieCompanyBlock,
   MovieInfoName,
   MovieMiniInfoBlocks,
@@ -13,17 +15,33 @@ import {
 } from './SelectedMovieInfo.styled'
 import { nanoid } from '@reduxjs/toolkit'
 import { SelectedMovieSimilar } from './SelectedMovieSimilar'
+import {delFavouritesMovie, setFavouritesMovie} from "../../redux/reducers";
 
 export const SelectedMovieInfo = (): JSX.Element => {
   const selectedMovie = useSelector(selectedMovieSelect)
+  const favourite = useSelector(selectedFavouritesMovie)
+  const isFavourite = favourite.findIndex((movie) => movie.id === selectedMovie.id) !== -1
+  const dispatch = useDispatch()
   return (
 
 <div>{selectedMovie && (
     <div>
         <StyledMovieInfo>
+          <FavouritesInImage>
+            <Favourites
+                style={isFavourite ? { color: 'red' } : {}}
+                onClick={() => {
+                  if (isFavourite) {
+                    dispatch(delFavouritesMovie(selectedMovie))
+                  } else {
+                    dispatch(setFavouritesMovie(selectedMovie))
+                  }
+                }}
+            />
         <PosterImage
             src={`${API_IMAGE_URL}${selectedMovie.poster_path}?api_key=${API_KEY}`}
         alt=''/>
+        </FavouritesInImage>
             <StyledMovieInfoBlock>
             <MovieInfoName>
             {selectedMovie.title}

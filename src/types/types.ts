@@ -1,11 +1,15 @@
 export interface ImovieStatus {
-  moviePopularList: ImovieData | undefined | null
+  moviePopularList: ImovieData | undefined | null;
   selectedMovieDetails: {
-    selectedMovieData: IselectedMovieData | undefined | null
-    selectedMovieSimilar: ImovieData | undefined | null
-  }
-  movieSearchData: ImovieData | undefined | null
-  movieNowPLaying: ImovieData | undefined | null
+    selectedMovieData: IselectedMovieData | undefined | null;
+    selectedMovieSimilar: ImovieData | undefined | null;
+
+  };
+  favouritesMovie: ImovieDateArray[] | undefined | null ;
+  movieSearchData: ImovieData | undefined | null;
+  movieNowPLaying: ImovieData | undefined | null;
+  isError: boolean;
+  isLoad: boolean;
 }
 
 export interface ImovieData {
