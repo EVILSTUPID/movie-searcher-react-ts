@@ -65,7 +65,9 @@ const movieSlice = createSlice({
       state.favouritesMovie = state.favouritesMovie.filter((movie) => movie.id !== action.payload.id)
     },
     setFavouritesMovie (state, action) {
+      if (action.payload !== null) {
       state.favouritesMovie = action.payload
+      }
     },
     clearMovieSearchData (state) {
       state.movieSearchData = null
