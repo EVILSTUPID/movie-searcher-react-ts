@@ -66,7 +66,7 @@ export const PopularMovie = () => {
             <PosterList>
                 {movie &&
                     movie.results.slice(0, 18).map((moviePost) => {
-                      const isFavourite = favourite.findIndex((movie) => movie.id === moviePost.id) !== -1
+                      const isFavourite = favourite.findIndex((movie) => movie?.id === moviePost?.id) !== -1
                       return (
                             <Poster key={nanoid()}>
                               <FavouritesInImage>
