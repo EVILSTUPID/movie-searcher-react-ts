@@ -20,7 +20,7 @@ import { addFavouritesMovie, delFavouritesMovie } from '../../redux/reducers'
 export const SelectedMovieInfo = (): JSX.Element => {
   const selectedMovie = useSelector(selectedMovieSelect)
   const favourite = useSelector(selectedFavouritesMovie)
-  const isFavourite = favourite.findIndex((movie) => movie?.id === selectedMovie?.id) !== -1
+  const isFavourite = favourite?.findIndex((movie) => movie?.id === selectedMovie?.id) !== -1
   const dispatch = useDispatch()
   return (
 
