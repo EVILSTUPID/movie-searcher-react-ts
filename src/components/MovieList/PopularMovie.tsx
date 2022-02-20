@@ -30,7 +30,9 @@ export const PopularMovie = () => {
   const favourite = useSelector(selectedFavouritesMovie)
   useEffect(() => {
     const favouritesMovie = JSON.parse(localStorage.getItem('movie-app-ts'))
+    if (favouritesMovie !== null){
     dispatch(setFavouritesMovie(favouritesMovie))
+    }
   }, [])
   const movieListPages = [
     {

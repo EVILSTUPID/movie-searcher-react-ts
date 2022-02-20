@@ -33,7 +33,9 @@ export const FavouriteMovie = (): JSX.Element => {
   }, [])
   useEffect(() => {
     const favouritesMovie = JSON.parse(localStorage.getItem('movie-app-ts'))
-    dispatch(setFavouritesMovie(favouritesMovie))
+    if (favouritesMovie !== null){
+      dispatch(setFavouritesMovie(favouritesMovie))
+    }
   }, [])
 
   return (
