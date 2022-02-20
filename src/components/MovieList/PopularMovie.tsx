@@ -28,6 +28,10 @@ export const PopularMovie = () => {
   const dispatch = useDispatch()
   const movie = useSelector(movieDataSelect)
   const favourite = useSelector(selectedFavouritesMovie)
+  const favouriteMovie = {
+    isFavourite: false
+  }
+
   useEffect(() => {
     const favouritesMovie = JSON.parse(localStorage.getItem('movie-app-ts'))
     dispatch(setFavouritesMovie(favouritesMovie))
@@ -66,15 +70,18 @@ export const PopularMovie = () => {
             <PosterList>
                 {movie &&
                     movie.results.slice(0, 18).map((moviePost) => {
-                      const isFavourite = favourite?.findIndex((movie) => movie?.id === moviePost?.id) !== -1
+                      if (favourite !== null) {
+                        favouriteMovie.isFavourite = favourite.findIndex(
+                            (movie) => movie?.id === moviePost?.id) !== -1
+                      }
                       return (
                             <Poster key={nanoid()}>
                               <FavouritesInImage>
 
                               <Favourites
-                                  style={isFavourite ? { color: 'red' } : {}}
+                                  style={favouriteMovie.isFavourite ? { color: 'red' } : {}}
                                   onClick={() => {
-                                    if (isFavourite) {
+                                    if (favouriteMovie.isFavourite) {
                                       dispatch(delFavouritesMovie(moviePost))
                                     } else {
                                       dispatch(addFavouritesMovie(moviePost))

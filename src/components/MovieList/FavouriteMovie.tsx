@@ -42,7 +42,7 @@ export const FavouriteMovie = (): JSX.Element => {
             <PosterList>
                 {favourite &&
                     favourite.map((favouriteMovie) => {
-                      const isFavourite = favourite?.findIndex((movie) => movie?.id === favouriteMovie?.id) !== -1
+                      const isFavourite = favourite.findIndex((movie) => movie?.id === favouriteMovie?.id) !== -1
                       return (
                             <Poster key={nanoid()}>
                                 <FavouritesInImage>
