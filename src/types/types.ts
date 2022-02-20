@@ -5,7 +5,7 @@ export interface ImovieStatus {
     selectedMovieSimilar: ImovieData | undefined | null;
 
   };
-  favouritesMovie: ImovieDateArray[] | undefined | null ;
+  favouritesMovie: ImovieDateArray[];
   movieSearchData: ImovieData | undefined | null;
   movieNowPLaying: ImovieData | undefined | null;
   isMovieDataError: boolean;

@@ -42,21 +42,15 @@ export const FavouriteMovie = (): JSX.Element => {
             <PosterList>
                 {favourite &&
                     favourite.map((favouriteMovie) => {
-                      const favouritedMovie = {
-                        isFavourite: false
-                      }
-                      if (favourite !== null) {
-                        favouritedMovie.isFavourite = favourite.findIndex(
-                            (movie) => movie?.id === favouriteMovie?.id) !== -1
-                      }
+                      const isFavourite = favourite.findIndex((movie) => movie.id === favouriteMovie.id) !== -1
                       return (
                             <Poster key={nanoid()}>
                                 <FavouritesInImage>
 
                                     <Favourites
-                                        style={favouritedMovie.isFavourite ? { color: 'red' } : {}}
+                                        style={isFavourite ? { color: 'red' } : {}}
                                         onClick={() => {
-                                          if (favouritedMovie.isFavourite) {
+                                          if (isFavourite) {
                                             dispatch(delFavouritesMovie(favouriteMovie))
                                           } else {
                                             dispatch(addFavouritesMovie(favouriteMovie))

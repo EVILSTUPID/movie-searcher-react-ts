@@ -57,17 +57,12 @@ const movieSlice = createSlice({
       state.movieNowPLaying = action.payload
     },
     addFavouritesMovie (state, action) {
-      if (state.favouritesMovie !== null){
       if (state.favouritesMovie.findIndex((movie) => movie.id === action.payload.id) == -1) {
-        state?.favouritesMovie.push(action.payload)
-      }} else {
-        state?.favouritesMovie.push(action.payload)
+        state.favouritesMovie.push(action.payload)
       }
     },
     delFavouritesMovie (state, action) {
-      if (state.favouritesMovie !== null){
-      state.favouritesMovie = state?.favouritesMovie.filter((movie) => movie.id !== action.payload.id)
-      }
+      state.favouritesMovie = state.favouritesMovie.filter((movie) => movie.id !== action.payload.id)
     },
     setFavouritesMovie (state, action) {
       state.favouritesMovie = action.payload
