@@ -1,5 +1,5 @@
-import {useDispatch, useSelector} from 'react-redux'
-import {selectedFavouritesMovie, selectedMovieSelect} from '../../redux/selectors'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectedFavouritesMovie, selectedMovieSelect } from '../../redux/selectors'
 import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
 import {
   Favourites,
@@ -15,20 +15,13 @@ import {
 } from './SelectedMovieInfo.styled'
 import { nanoid } from '@reduxjs/toolkit'
 import { SelectedMovieSimilar } from './SelectedMovieSimilar'
-import {delFavouritesMovie, addFavouritesMovie, setFavouritesMovie} from "../../redux/reducers";
-import {saveToLocalStorage} from "../../redux/tools/localStorage";
-import {useEffect} from "react";
+import { addFavouritesMovie, delFavouritesMovie } from '../../redux/reducers'
 
 export const SelectedMovieInfo = (): JSX.Element => {
   const selectedMovie = useSelector(selectedMovieSelect)
   const favourite = useSelector(selectedFavouritesMovie)
   const isFavourite = favourite.findIndex((movie) => movie?.id === selectedMovie?.id) !== -1
   const dispatch = useDispatch()
-  useEffect(() => {
-    const favouritesMovie = JSON.parse(localStorage.getItem('movie-app-ts'))
-    dispatch(setFavouritesMovie(favouritesMovie))
-
-  },[])
   return (
 
 <div>{selectedMovie && (
@@ -42,7 +35,6 @@ export const SelectedMovieInfo = (): JSX.Element => {
                     dispatch(delFavouritesMovie(selectedMovie))
                   } else {
                     dispatch(addFavouritesMovie(selectedMovie))
-
                   }
                 }}
             />
@@ -72,6 +64,7 @@ export const SelectedMovieInfo = (): JSX.Element => {
                         <div key={nanoid()}>
                             <div>&nbsp;{companies.name},</div>
                         </div>
+
                   )
                 })}</MovieCompanyBlock></MovieMiniInfoBlocks>
 

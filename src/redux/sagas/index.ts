@@ -1,6 +1,10 @@
 import { call, fork, put, takeEvery } from 'redux-saga/effects'
 import { LOAD_PAGE, LOAD_SEARCHED_MOVIE, LOAD_SELECTED_MOVIE } from '../actions/actions'
 import {
+  fetchMovieDataError,
+  fetchMovieDataLoad,
+  fetchSelectMovieError,
+  fetchSelectMovieLoad,
   setMovieData,
   setMovieNowPlaying,
   setMovieSearchData,
@@ -10,25 +14,33 @@ import {
 import { API_KEY, axiosPopular } from '../tools/api'
 
 export function * workerMovieLoad ({ payload }) {
-  const nowPlayingMovie = yield call(() => axiosPopular.get(
-    `movie/upcoming?api_key=${API_KEY}&page=${payload}&language=ru`
-))
-  yield put(setMovieNowPlaying(nowPlayingMovie.data))
-  const popularMovieArr = yield call(() => axiosPopular.get(
-      `movie/popular?api_key=${API_KEY}&page=${payload}&language=ru`
-  ))
-  yield put(setMovieData(popularMovieArr.data))
-
+  try {
+    const nowPlayingMovie = yield call(() => axiosPopular.get(
+        `movie/upcoming?api_key=${API_KEY}&page=${payload}&language=ru`
+    ))
+    yield put(setMovieNowPlaying(nowPlayingMovie.data))
+    const popularMovieArr = yield call(() => axiosPopular.get(
+        `movie/popular?api_key=${API_KEY}&page=${payload}&language=ru`
+    ))
+    yield put(setMovieData(popularMovieArr.data))
+    yield put(fetchMovieDataLoad())
+  } catch (error) {
+    yield put(fetchMovieDataError())
+  }
 }
 export function * workerMovieSelect ({ payload }) {
-  const selectedMovieInfo = yield call(() => axiosPopular.get(`movie/${payload}?api_key=${API_KEY}&language=ru`))
-  yield put(setSelectedMovieDetailsData(selectedMovieInfo.data))
-  const selectedMovieSimilar = yield call(() => axiosPopular
-    .get(
+  try {
+    const selectedMovieInfo = yield call(() => axiosPopular.get(`movie/${payload}?api_key=${API_KEY}&language=ru`))
+    yield put(setSelectedMovieDetailsData(selectedMovieInfo.data))
+    const selectedMovieSimilar = yield call(() => axiosPopular
+      .get(
           `/movie/${payload}/similar?api_key=${API_KEY}&language=ru&page=1`
-    ))
-  yield put(setMovieSimilar(selectedMovieSimilar.data))
-  console.log(selectedMovieSimilar)
+      ))
+    yield put(setMovieSimilar(selectedMovieSimilar.data))
+    yield put(fetchSelectMovieLoad())
+  } catch (error) {
+    yield put(fetchSelectMovieError())
+  }
 }
 
 export function * workerMovieSearch ({ payload }) {

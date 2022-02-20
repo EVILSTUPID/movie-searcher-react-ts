@@ -8,8 +8,10 @@ export interface ImovieStatus {
   favouritesMovie: ImovieDateArray[] | undefined | null ;
   movieSearchData: ImovieData | undefined | null;
   movieNowPLaying: ImovieData | undefined | null;
-  isError: boolean;
-  isLoad: boolean;
+  isMovieDataError: boolean;
+  isMovieDataLoad: boolean;
+  isSelectedMovieDataError: boolean;
+  isSelectedMovieDataLoad: boolean;
 }
 
 export interface ImovieData {

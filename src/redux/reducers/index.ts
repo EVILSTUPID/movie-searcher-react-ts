@@ -11,16 +11,38 @@ const initialState: ImovieStatus = {
   favouritesMovie: [],
   movieSearchData: null,
   movieNowPLaying: null,
-  isError: false,
-  isLoad: false,
+  isMovieDataError: false,
+  isMovieDataLoad: false,
+  isSelectedMovieDataError: false,
+  isSelectedMovieDataLoad: false
 }
 
-const weatherSlice = createSlice({
-  name: 'weather',
+const movieSlice = createSlice({
+  name: 'movie',
   initialState,
   reducers: {
     setMovieData (state, action) {
       state.moviePopularList = action.payload
+    },
+    fetchMovieDataError (state) {
+      state.isMovieDataError = true
+      state.isMovieDataLoad = false
+    },
+    fetchMovieDataLoad (state) {
+      state.isMovieDataLoad = true
+      state.isMovieDataError = false
+    },
+    fetchSelectMovieError (state) {
+      state.isSelectedMovieDataError = true
+      state.isSelectedMovieDataLoad = false
+    },
+    fetchSelectMovieLoad (state) {
+      state.isSelectedMovieDataLoad = true
+      state.isSelectedMovieDataError = false
+    },
+    clearFetchSelectMovieLoad (state) {
+      state.isSelectedMovieDataLoad = false
+      state.isSelectedMovieDataError = false
     },
     setSelectedMovieDetailsData (state, action) {
       state.selectedMovieDetails.selectedMovieData = action.payload
@@ -35,7 +57,7 @@ const weatherSlice = createSlice({
       state.movieNowPLaying = action.payload
     },
     addFavouritesMovie (state, action) {
-      if (state.favouritesMovie.findIndex((movie) => movie.id === action.payload.id) == -1){
+      if (state.favouritesMovie.findIndex((movie) => movie.id === action.payload.id) == -1) {
         state.favouritesMovie.push(action.payload)
       }
     },
@@ -67,8 +89,9 @@ export const {
   setSelectedMovieDetailsData, setMovieSearchData,
   clearMovieSearchData, setMovieSimilar,
   addFavouritesMovie, delFavouritesMovie,
-  setFavouritesMovie
+  setFavouritesMovie, fetchMovieDataLoad, fetchMovieDataError,
+  fetchSelectMovieError, fetchSelectMovieLoad, clearFetchSelectMovieLoad
 
-} = weatherSlice.actions
+} = movieSlice.actions
 
-export const weatherReducer = weatherSlice.reducer
+export const movieReducer = movieSlice.reducer

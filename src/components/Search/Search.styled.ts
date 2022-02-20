@@ -1,15 +1,18 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export const MovieSearchList = styled.div`
   background-color: white;
   display: flex;
   flex-wrap: wrap;
-  width: 169px;
+  max-width: 169px;
   padding: 10px 5px 10px 5px;
   border-radius: 20px;
   border: 1px black solid;
   font-size: 15px;
+  @media (max-width: 500px) {
+    max-width: 100px;
+  }
 
 `
 
@@ -30,6 +33,9 @@ export const InputStyled = styled.input`
   height: 30px;
   padding-left: 10px;
   max-width: 183px;
+  @media (max-width: 500px) {
+    max-width: 100px;
+  }
 `
 export const StyledLink = styled(Link)`
   text-decoration: none;
@@ -40,9 +46,17 @@ export const StyledLink = styled(Link)`
 export const MovieSearchPoster = styled.img`
   width: 50px;
   height: 60px;
+  @media (max-width: 500px) {
+    width: 20px;
+    height: 30px;
+  }
 `
 export const MovieSearchName = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-left: 5px;
+  padding: 5px;
+  @media (max-width: 500px) {
+    max-width: 70px;
+    overflow-x: auto;
+  }
 `

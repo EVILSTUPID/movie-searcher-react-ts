@@ -1,21 +1,28 @@
 import { useDispatch, useSelector } from 'react-redux'
-import {movieDataSelect, selectedFavouritesMovie} from '../../redux/selectors'
+import { movieDataSelect, selectedFavouritesMovie } from '../../redux/selectors'
 import {
-  setPage,
-  setSelectedMovieId,
   addFavouritesMovie,
   delFavouritesMovie,
-  setFavouritesMovie
+  setFavouritesMovie,
+  setPage,
+  setSelectedMovieId
 } from '../../redux/reducers'
-import {Favourites, Pages, Poster, PosterImage, PosterList, PosterName, FavouritesInImage, StyledLink} from './PopularMovie.styled'
+import {
+  Favourites,
+  FavouritesInImage,
+  Pages,
+  Poster,
+  PosterImage,
+  PosterList,
+  PosterName, ReadyPages,
+  StyledLink
+} from './PopularMovie.styled'
 import { nanoid } from '@reduxjs/toolkit'
 import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material'
 import * as React from 'react'
-import {useEffect, useState} from "react";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import {scrollUp} from "../../redux/tools/scrollUp";
-import {saveToLocalStorage} from "../../redux/tools/localStorage";
+import { useEffect } from 'react'
+import { scrollUp } from '../../redux/tools/scrollUp'
 
 export const PopularMovie = () => {
   const dispatch = useDispatch()
@@ -24,8 +31,7 @@ export const PopularMovie = () => {
   useEffect(() => {
     const favouritesMovie = JSON.parse(localStorage.getItem('movie-app-ts'))
     dispatch(setFavouritesMovie(favouritesMovie))
-
-  },[])
+  }, [])
   const movieListPages = [
     {
       pages: movie?.page
@@ -55,8 +61,6 @@ export const PopularMovie = () => {
     }
   }
 
-
-
   return (
         <div>
             <PosterList>
@@ -73,8 +77,7 @@ export const PopularMovie = () => {
                                     if (isFavourite) {
                                       dispatch(delFavouritesMovie(moviePost))
                                     } else {
-                                    dispatch(addFavouritesMovie(moviePost))
-
+                                      dispatch(addFavouritesMovie(moviePost))
                                     }
                                   }}
                               />
@@ -97,7 +100,7 @@ export const PopularMovie = () => {
                 }
             </PosterList>
             <Pages>
-                <KeyboardArrowLeft onClick={() => {
+                <KeyboardArrowLeft style={{ cursor: 'pointer' }} onClick={() => {
                   backPage()
                   scrollUp()
                 }}/>
@@ -106,19 +109,19 @@ export const PopularMovie = () => {
                       if (isNaN(readyPages.pages)) {
                         readyPages.pages = undefined
                       }
-                      const issddFavourite = readyPages?.pages === movie?.page
+                      const currentPage = readyPages?.pages === movie?.page
                       return (
-                            <div onClick={() => {
+                            <ReadyPages onClick={() => {
                               dispatch(setPage(readyPages.pages))
                               scrollUp()
                             }}
-                                 style={issddFavourite ? {color: 'red'} : {}}
+                                 style={currentPage ? { color: 'red' } : {}}
                                  key={nanoid()}>
                                 {readyPages.pages}
-                            </div>
+                            </ReadyPages>
                       )
                     })}
-                <KeyboardArrowRight onClick={() => {
+                <KeyboardArrowRight style={{ cursor: 'pointer' }} onClick={() => {
                   nextPage()
                   scrollUp()
                 }}/>

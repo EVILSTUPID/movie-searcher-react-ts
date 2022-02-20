@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { clearMovieSearchData, setSearchedMovie, setSelectedMovieId } from '../../redux/reducers'
+import {
+  clearFetchSelectMovieLoad,
+  clearMovieSearchData,
+  setSearchedMovie,
+  setSelectedMovieId
+} from '../../redux/reducers'
 import { searchedMovieSelect } from '../../redux/selectors'
 import { nanoid } from '@reduxjs/toolkit'
 import {
@@ -13,7 +18,7 @@ import {
   StyledLink
 } from './Search.styled'
 import { API_IMAGE_URL, API_KEY } from '../../redux/tools/api'
-import {scrollUp} from "../../redux/tools/scrollUp";
+import { scrollUp } from '../../redux/tools/scrollUp'
 
 export const Search = () => {
   const [value, setValue] = useState<string>('')
@@ -31,11 +36,10 @@ export const Search = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (value.trim()) {
-      setValue('')          
+      setValue('')
     }
   }
   return (
-
         <SearchStyled>
             <form onSubmit={handleSubmit}>
                 <InputStyled
@@ -47,14 +51,15 @@ export const Search = () => {
             </form>
             <AutoComplete>
                 {movieSearched &&
-                    movieSearched.slice(0, 4).map((movie) => {
+                    movieSearched.slice(0, 10).map((movie) => {
                       return (
 
                             <MovieSearchList key={nanoid()}>
                                 <StyledLink onClick={() => {
                                   dispatch(setSelectedMovieId(movie.id))
                                   dispatch(clearMovieSearchData())
-                                    scrollUp()
+                                  dispatch(clearFetchSelectMovieLoad())
+                                  scrollUp()
                                   setValue('')
                                 }} to='/info'>
                                     <div>

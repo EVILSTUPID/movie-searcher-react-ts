@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { SwiperSlide, Swiper } from 'swiper/react'
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Swiper, SwiperSlide } from 'swiper/react'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
 export const PosterImage = styled.img`
   width: 250px;
@@ -10,7 +10,7 @@ export const PosterImage = styled.img`
 `
 export const FavouritesInImage = styled.div`
   position: relative;
-`;
+`
 export const Favourites = styled(FavoriteIcon)`
   position: absolute;
   top: 0;
@@ -63,8 +63,8 @@ export const SwiperStyled = styled(Swiper)`
     background-color: rgb(255, 255, 255, 1);
     width: 10px;
     height: 10px;
+    cursor: pointer;
   }
-
   .swiper-pagination-bullet-active {
     width: 10px;
     height: 10px;

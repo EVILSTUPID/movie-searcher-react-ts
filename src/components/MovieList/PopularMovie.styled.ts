@@ -1,10 +1,8 @@
-import styled from 'styled-components';
-import {Link} from "react-router-dom";
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
-
-
-export const Favourites= styled(FavoriteIcon)`
+export const Favourites = styled(FavoriteIcon)`
   position: absolute;
   top: 0;
   right: 0;
@@ -32,16 +30,16 @@ export const Favourites= styled(FavoriteIcon)`
   }
   
 ;
-`;
+`
 export const PosterImage = styled.img`
   width: 250px;
   height: 350px;
   border-radius: 20px;
   box-shadow: 0 30px 10px 0 rgba(0, 0, 0, 0.8);
-`;
+`
 export const FavouritesInImage = styled.div`
   position: relative;
-`;
+`
 export const FavouritesTitle = styled.div`
   font-size: 20px;
   margin-top: 13px;
@@ -49,7 +47,7 @@ export const FavouritesTitle = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-`;
+`
 
 export const Poster = styled.div`
   display: flex;
@@ -57,7 +55,7 @@ export const Poster = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-left: 10px;
-`;
+`
 
 export const PosterList = styled.div`
   display: flex;
@@ -65,8 +63,11 @@ export const PosterList = styled.div`
   justify-content: center;
   margin-top: 20px;
   
-`;
+`
 
+export const ReadyPages = styled.div`
+    cursor: pointer;
+`
 export const PosterName = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -77,7 +78,7 @@ export const PosterName = styled.div`
   font-size: 20px;
   text-shadow: 0 0 3px white, 0 0 8px #b61301;
   text-decoration: none;
-`;
+`
 
 export const Pages = styled.div`
   display: flex;
@@ -87,14 +88,8 @@ export const Pages = styled.div`
   font-size: 25px;
   color: #c9c9c9;
   padding-bottom: 20px;
-`;
+`
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
-`;
-
-
-
-
-
-
+`
